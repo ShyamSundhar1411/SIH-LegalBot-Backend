@@ -16,6 +16,7 @@ flask-restful = "^0.3.10"
 flask-login = "^0.6.2"
 flask-admin = "^1.6.1"
 flask-jwt = "^0.3.2"
+openapi = "^1.1.0"
 
 
 [build-system]
