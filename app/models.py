@@ -9,7 +9,6 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(100),nullable=False)
     password_hash = db.Column(db.String(128))
     admin = db.Column(db.Boolean,default = False)
-    messages = db.relationship('Message', backref='user', lazy=True)
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
@@ -27,6 +26,7 @@ class Message(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     user = db.Column(db.Integer,db.ForeignKey("user.id"),nullable=False)
     is_user = db.Column(db.Boolean,default = True)
+    user = db.relationship('User', backref=db.backref('users', lazy='dynamic'))
+    text = db.Column(db.String)
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False,info = {"label":"User"})
     timestamp = db.Column(db.DateTime,default=datetime.utcnow)
-
-    
